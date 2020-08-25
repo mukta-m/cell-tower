@@ -7,18 +7,6 @@
 #include <math.h>
 
 
-
-// Handle client requests coming in through the server socket.  This code should run
-// indefinitiely.  It should wait for a client to send a request, process it, and then
-// close the client connection and wait for another client.  The requests that may be
-// handles are SHUTDOWN, CONNECT and UPDATE.  A SHUTDOWN request causes the tower to
-// go offline.   A CONNECT request contains 4 additional bytes which are the high and
-// low bytes of the vehicle's X coordinate, followed by the high and low bytes of its
-// Y coordinate.  If within range of this tower, the connection is accepted and a YES
-// is returned, along with a char id for the vehicle and the tower id.   If UPDATE is
-// received, the additional 4 byes for the (X,Y) coordinate are also received as well
-// as the id of the vehicle.   Then YES is returned if the vehicle is still within
-// the tower range, otherwise NO is returned.
 void *handleIncomingRequests(void *ct) {
   CellTower       *tower = ct;
 
@@ -200,7 +188,7 @@ void *handleIncomingRequests(void *ct) {
       break;
     }
   }
-    // Don't forget to close the sockets!
+    // close the sockets!
     close(serverSocket);
     printf("SERVER: Shutting down.\n");
 
